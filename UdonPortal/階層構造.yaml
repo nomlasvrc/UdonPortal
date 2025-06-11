@@ -1,0 +1,191 @@
+- ○ UdonPortal:
+  - Transform
+  - UdonBehaviour
+  - Null Component
+  - Null Component
+  - Null Component
+  - Null Component
+  - Null Component
+  - ○ VRCPortalMarker(Clone):
+    - Transform
+    - ○ BoxCollider
+    - VRCPortalMarker
+    - Null Component
+    - × Cube:
+      - Transform
+      - MeshFilter
+      - MeshRenderer
+    - ○ PortalInternal(Clone):
+      - Transform
+      - Null Component
+      - AsyncDestroyTrigger
+      - ○ BoxCollider
+      - Null Component
+      - ○ PortalGraphics:
+        - Transform
+        - ○ Base Graphics:
+          - Transform
+          - ○ Portal Plane:
+            - Transform
+            - MeshFilter
+            - Null Component
+          - ○ Blue Sparks:
+            - Transform
+            - ParticleSystem
+            - Null Component
+            - ÎÎÍÍÍÏÍÏÎÎÏÍÍÎÎÏÎÏÎÎÍÌÌ
+          - ○ Embers:
+            - Transform
+            - ParticleSystem
+            - Null Component
+            - ÎÎÍÍÍÏÍÏÎÎÏÍÍÎÎÏÎÏÎÎÍÌÌ
+          - × Expanding Ring FX:
+            - Transform
+            - MeshFilter
+            - MeshRenderer
+        - × CLElements:
+          - Transform
+          - ○ Mesh_CLPortal_Ring:
+            - Transform
+            - MeshFilter
+            - MeshRenderer
+          - ○ Icon_CLPortalBack:
+            - Transform
+            - SpriteRenderer
+        - × _InvalidDestination_PortalGraphics:
+          - Transform
+          - ○ Mesh_InvalidPortal_Ring:
+            - Transform
+            - MeshFilter
+            - MeshRenderer
+          - ○ Icon_InvalidPortalFront:
+            - Transform
+            - SpriteRenderer
+          - ○ Icon_InvalidPortalFront (1):
+            - Transform
+            - SpriteRenderer
+        - × _ProximityPortalGraphics:
+          - Transform
+          - ○ UI_Holoport_Cursor_Proximity:
+            - Transform
+            - ○ PortalProximityRing:
+              - Transform
+              - SpriteRenderer
+            - ○ PortalProximity_UI_GEO:
+              - Transform
+              - Animator
+              - ○ Gimble_Container_1:
+                - Transform
+                - ○ Arrow_Gimble:
+                  - Transform
+                  - ○ Arrow_GEO:
+                    - Transform
+                    - MeshFilter
+                    - MeshRenderer
+              - ○ Gimble_Container_2:
+                - Transform
+                - ○ Arrow_Gimble:
+                  - Transform
+                  - ○ Arrow_GEO:
+                    - Transform
+                    - MeshFilter
+                    - MeshRenderer
+              - ○ Gimble_Container_3:
+                - Transform
+                - ○ Arrow_Gimble:
+                  - Transform
+                  - ○ Arrow_GEO:
+                    - Transform
+                    - MeshFilter
+                    - MeshRenderer
+              - ○ Gimble_Container_4:
+                - Transform
+                - ○ Arrow_Gimble:
+                  - Transform
+                  - ○ Arrow_GEO:
+                    - Transform
+                    - MeshFilter
+                    - MeshRenderer
+      - ○ Canvas:
+        - RectTransform
+        - ÎÌÎÍÎÍÎÎÏÌÌÏÌÏÍÏÏÌÏÌÏÎÏ
+        - Canvas
+        - VerticalLayoutGroup
+        - ContentSizeFitter
+        - ○ WorldText:
+          - RectTransform
+          - CanvasRenderer
+          - ÎÍÌÏÎÏÏÎÍÌÍÏÎÌÏÍÎÍÍÌÏÎÍ
+        - × OwnerText:
+          - RectTransform
+          - CanvasRenderer
+          - ÎÍÌÏÎÏÏÎÍÌÍÏÎÌÏÍÎÍÍÌÏÎÍ
+        - ○ AccessText:
+          - RectTransform
+          - CanvasRenderer
+          - ÎÍÌÏÎÏÏÎÍÌÍÏÎÌÏÍÎÍÍÌÏÎÍ
+          - ○ TMP UI SubObject [NotoSans-Regular SDF Portals]:
+            - RectTransform
+            - LayoutElement
+            - CanvasRenderer
+            - TMP_SubMeshUI
+          - ○ TMP UI SubObject [VRC_TMPro_Sprites_No-ZTest]:
+            - RectTransform
+            - LayoutElement
+            - CanvasRenderer
+            - TMP_SubMeshUI
+        - ○ GroupText:
+          - RectTransform
+          - CanvasRenderer
+          - ÎÍÌÏÎÏÏÎÍÌÍÏÎÌÏÍÎÍÍÌÏÎÍ
+          - ○ TMP UI SubObject [NotoSans-Regular SDF Portals]:
+            - RectTransform
+            - LayoutElement
+            - CanvasRenderer
+            - TMP_SubMeshUI
+          - ○ TMP UI SubObject [NotoSans-Regular SDF Portals]:
+            - RectTransform
+            - LayoutElement
+            - CanvasRenderer
+            - TMP_SubMeshUI
+        - × AgeGateText:
+          - RectTransform
+          - CanvasRenderer
+          - ÎÍÌÏÎÏÏÎÍÌÍÏÎÌÏÍÎÍÍÌÏÎÍ
+        - ○ PlayerCount:
+          - RectTransform
+          - CanvasRenderer
+          - ÎÍÌÏÎÏÏÎÍÌÍÏÎÌÏÍÎÍÍÌÏÎÍ
+        - ○ Timer:
+          - RectTransform
+          - CanvasRenderer
+          - ÎÍÌÏÎÏÏÎÍÌÍÏÎÌÏÍÎÍÍÌÏÎÍ
+      - ○ PlatformCanvas:
+        - RectTransform
+        - Canvas
+        - ○ PlatformIcons:
+          - RectTransform
+          - CanvasRenderer
+          - LayoutElement
+          - ÌÍÎÍÌÍÎÏÎÍÏÏÏÎÌÍÍÍÏÎÎÎÍ
+          - GridLayoutGroup
+          - ÎÎÌÏÏÎÍÍÍÌÎÎÍÌÎÏÏÍÎÍÏÌÎ
+          - Canvas
+          - GraphicRaycaster
+          - ○ Portal_SupportedPlatformLabel(Clone):
+            - RectTransform
+            - CanvasRenderer
+            - ÎÍÏÎÎÍÎÍÌÍÎÌÎÌÌÌÌÌÏÎÌÏÍ
+            - ÎÎÍÌÏÎÎÌÌÍÏÍÎÎÌÏÍÏÍÌÌÎÌ
+            - LayoutElement
+            - CanvasGroup
+            - ○ Icon:
+              - RectTransform
+              - CanvasRenderer
+              - ÏÏÍÌÍÌÌÍÏÎÍÍÎÌÎÍÎÎÌÎÍÍÍ
+      - ○ PortalSelector:
+        - Transform
+        - ÎÌÌÌÌÎÏÍÍÍÎÎÏÏÏÌÍÌÎÎÏÌÏ
+        - MeshFilter
+        - MeshRenderer
+        - ○ BoxCollider

@@ -1,0 +1,21 @@
+{
+    "name": "UdonPortal.Editor",
+    "rootNamespace": "Nomlas.UdonPortal",
+    "references": [
+        "UdonPortal",
+        "Unity.TextMeshPro",
+        "UdonSharp.Runtime",
+        "VRC.SDKBase.Editor"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
