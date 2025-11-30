@@ -8,7 +8,7 @@ using VRC.Udon;
 namespace Nomlas.UdonPortal
 {
     [UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-    public class UdonPortal : UdonPortalBase
+    public class UdonPortal : UdonSharpBehaviour
     {
         [SerializeField] private GameObject portalMarkerPrefab;
         [SerializeField] private MessageManager messageManager;
@@ -39,7 +39,7 @@ namespace Nomlas.UdonPortal
         /// </summary>
         public void NewPortal(string worldId, string instanceId, Region region)
         {
-            GenerateNewPortalAll($"{FString("", worldId)}{FString(":", instanceId)}~{GetRegion(region)}");
+            GenerateNewPortalAll($"{Utils.FString("", worldId)}{Utils.FString(":", instanceId)}~{Utils.GetRegion(region)}");
         }
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace Nomlas.UdonPortal
         /// </summary>
         public void NewPortal(string worldId, string instanceId, string userId, InstanceType instanceType, Region region)
         {
-            GenerateNewPortalAll($"{FString("", worldId)}{FString(":", instanceId)}{GetInstanceTypeString(instanceType, userId)}~{GetRegion(region)}");
+            GenerateNewPortalAll($"{Utils.FString("", worldId)}{Utils.FString(":", instanceId)}{Utils.GetInstanceTypeString(instanceType, userId)}~{Utils.GetRegion(region)}");
         }
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace Nomlas.UdonPortal
         /// </summary>
         public void NewPortal(string worldId, string instanceId, string groupId, GroupType groupType, Region region)
         {
-            GenerateNewPortalAll($"{FString("", worldId)}{FString(":", instanceId)}{GetGroupTypeString(groupType, groupId)}~{GetRegion(region)}");
+            GenerateNewPortalAll($"{Utils.FString("", worldId)}{Utils.FString(":", instanceId)}{Utils.GetGroupTypeString(groupType, groupId)}~{Utils.GetRegion(region)}");
         }
 
         private void GenerateNewPortalAll(string id)

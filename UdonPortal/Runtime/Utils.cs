@@ -1,19 +1,16 @@
 
 using System;
-using UdonSharp;
-using UnityEngine;
 
 namespace Nomlas.UdonPortal
 {
-    [UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-    public class UdonPortalBase : UdonSharpBehaviour
+    public class Utils
     {
-        protected static string Nonce()
+        public static string Nonce()
         {
             return $"~nonce({Guid.NewGuid()})";
         }
 
-        protected static string GetInstanceTypeString(InstanceType instanceType, string userId)
+        public static string GetInstanceTypeString(InstanceType instanceType, string userId)
         {
             switch (instanceType)
             {
@@ -32,7 +29,7 @@ namespace Nomlas.UdonPortal
             }
         }
 
-        protected static string GetGroupTypeString(GroupType groupType, string groupId)
+        public static string GetGroupTypeString(GroupType groupType, string groupId)
         {
             switch (groupType)
             {
@@ -47,12 +44,12 @@ namespace Nomlas.UdonPortal
             }
         }
 
-        protected static string GetRegion(Region region)
+        public static string GetRegion(Region region)
         {
             return $"region({GetRegionString(region)})";
         }
 
-        protected static string GetRegionString(Region region)
+        public static string GetRegionString(Region region)
         {
             switch (region)
             {
@@ -64,9 +61,40 @@ namespace Nomlas.UdonPortal
             }
         }
 
-        protected static string FString(string delimiter, string target)
+        public static string FString(string delimiter, string target)
         {
             return string.IsNullOrWhiteSpace(target) ? "" : (delimiter + target);
         }
+    }
+        public enum Region
+    {
+        us,
+        use,
+        eu,
+        jp
+    }
+
+    public enum InstanceType
+    {
+        Public,
+        FriendsPlus,
+        Friends,
+        InvitePlus,
+        Invite
+    }
+
+    public enum GroupType
+    {
+        Group,
+        GroupPlus,
+        GroupPublic
+    }
+
+    public enum UserOrGroup
+    {
+        Neither,
+        User,
+        Group,
+        Both
     }
 }
