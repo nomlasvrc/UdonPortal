@@ -12,6 +12,7 @@ namespace Nomlas.UdonPortal
     {
         [Header("UdonPortal")][SerializeField] private Transform udonPortal;
         [Header("ポータルのワールドやインスタンスIDなどを表示するTMP")][SerializeField] private TextMeshProUGUI roomData;
+        [Header("生の階層構造を出力するTMP")][SerializeField] private TMP_InputField rawHierarchy;
         [Header("ポータルをイメージとして表示する先")][SerializeField] private Transform portalParent;
         [Header("ポータルセレクターの親")][SerializeField] private Transform selectorParent;
         [Header("Joinヘルパー")][SerializeField] private GameObject join;
@@ -38,13 +39,15 @@ namespace Nomlas.UdonPortal
 
         private void UpdatePortalData()
         {
-            Transform WorldTextT = udonPortal.Find("VRCPortalMarker(Clone)/PortalInternal(Clone)/Canvas/" + "WorldText");
-            Transform OwnerTextT = udonPortal.Find("VRCPortalMarker(Clone)/PortalInternal(Clone)/Canvas/" + "OwnerText");
-            Transform AccessTextT = udonPortal.Find("VRCPortalMarker(Clone)/PortalInternal(Clone)/Canvas/" + "AccessText");
-            Transform GroupTextT = udonPortal.Find("VRCPortalMarker(Clone)/PortalInternal(Clone)/Canvas/" + "GroupText");
-            Transform AgeGateTextT = udonPortal.Find("VRCPortalMarker(Clone)/PortalInternal(Clone)/Canvas/" + "AgeGateText");
-            Transform PlayerCountT = udonPortal.Find("VRCPortalMarker(Clone)/PortalInternal(Clone)/Canvas/" + "PlayerCount");
-            Transform TimerT = udonPortal.Find("VRCPortalMarker(Clone)/PortalInternal(Clone)/Canvas/" + "Timer");
+            var canvasRoot = udonPortal.Find("VRCPortalMarker(Clone)/PortalInternal(Clone)/Canvas");
+            if (canvasRoot == null) return;
+            Transform WorldTextT = canvasRoot.Find("WorldText");
+            Transform OwnerTextT = canvasRoot.Find("OwnerText");
+            Transform AccessTextT = canvasRoot.Find("AccessText");
+            Transform GroupTextT = canvasRoot.Find("GroupText");
+            Transform AgeGateTextT = canvasRoot.Find("AgeGateText");
+            Transform PlayerCountT = canvasRoot.Find("PlayerCount");
+            Transform TimerT = canvasRoot.Find("Timer");
             TextMeshProUGUI WorldTextC = (WorldTextT != null) ? WorldTextT.GetComponent<TextMeshProUGUI>() : null;
             TextMeshProUGUI OwnerTextC = (OwnerTextT != null) ? OwnerTextT.GetComponent<TextMeshProUGUI>() : null;
             TextMeshProUGUI AccessTextC = (AccessTextT != null) ? AccessTextT.GetComponent<TextMeshProUGUI>() : null;
@@ -102,6 +105,81 @@ namespace Nomlas.UdonPortal
         {
             UpdatePortalData();
             SendCustomEventDelayedSeconds(nameof(Check), checkInterval);
+        }
+
+        public void Write()
+        {
+            StartPrint();
+        }
+
+        void StartPrint()
+        {
+            rawHierarchy.text = "";
+            PrintComponentTree(udonPortal.gameObject, 0);
+        }
+
+        [RecursiveMethod]
+        void PrintComponentTree(GameObject obj, int indentLevel)
+        {
+            string s = "";
+            string indent = new string(' ', indentLevel * 2);
+
+            rawHierarchy.text += s + indent + "- " + (obj.activeSelf ? "○" : "×") + " " + obj.name + ":\n";
+
+            // GameObjectにアタッチされているコンポーネントをすべて取得し表示
+            Component[] components = obj.GetComponents<Component>();
+            foreach (Component comp in components)
+            {
+                if (comp == null)
+                {
+                    rawHierarchy.text += s + indent + "  - " + "Null Component" + "\n";
+                    continue;
+                }
+                var t = "";
+                var type = comp.GetType();
+                if (type == typeof(BoxCollider))
+                {
+                    BoxCollider c = (BoxCollider)comp;
+                    t = (c.enabled ? "○" : "×") + " ";
+                }
+                if (type == typeof(MeshRenderer))
+                {
+                    MeshRenderer c = (MeshRenderer)comp;
+                    t = (c.enabled ? "○" : "×") + " ";
+                }
+                if (type.Name == "ÎÏÎÍÎÍÏÎÌÏÏÎÍÍÍÎÏÍÏÎÌÌÌ")
+                {
+                    TextMeshProUGUI c = (TextMeshProUGUI)comp;
+                    rawHierarchy.text += s + indent + "  - " + t + "TextMeshProUGUI" + ":\n";
+                    rawHierarchy.text += s + indent + "    - text: \"" + c.text + "\"\n";
+                }
+                else
+                {
+                    rawHierarchy.text += s + indent + "  - " + t + type.Name + "\n";
+                }
+            }
+
+            if (obj.transform == null)
+            {
+                rawHierarchy.text += "Transform error!\n";
+                return;
+            }
+            // 子オブジェクトに対して再帰的に処理
+            foreach (Transform child in obj.transform)
+            {
+                if (child == null)
+                {
+                    rawHierarchy.text += "child transform error!\n";
+                    continue;
+                }
+                var g = child.gameObject;
+                if (g == null)
+                {
+                    rawHierarchy.text += "child gameObject error!\n";
+                    continue;
+                }
+                PrintComponentTree(g, indentLevel + 1);
+            }
         }
     }
 }
